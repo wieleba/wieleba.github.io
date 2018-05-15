@@ -42,13 +42,14 @@
 		  <input type='text' onChange={this.updateMessage}/>
 		  <h1>Hello React</h1>
 		  <div>{this.props.message}</div>
+		  <div>{this.props.number}</div>
 		  <div>{this.state.message}</div>
 		</div>
 	  );
 	}
       });
 
-      ReactDOM.render(<HelloReact number='not a number' />, document.getElementById('view'));  
+      ReactDOM.render(<HelloReact number='42' />, document.getElementById('view'));  
     </script>
   </body>
 </html>
