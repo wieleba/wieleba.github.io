@@ -1,0 +1,11 @@
+div[class*="col-"] {
+    border: 1px dotted rgb(60, 60, 60, 0.5);
+    padding: 10px;
+    background-color: #eee;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    min-height: 40px;
+    line-height: 40px;
+}

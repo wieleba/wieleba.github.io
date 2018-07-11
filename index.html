@@ -1,55 +1,32 @@
-<!DOCTYPE html>
-<html>
-  <head lang="en">
-    <meta charset="UTF-8" />
-    <title>Hello React</title>
-    <script src="https://fb.me/react-with-addons-0.14.0.js"></script>
-    <script src="https://fb.me/react-dom-0.14.0.js"></script>
-    <script src="https://fb.me/JSXTransformer-0.13.1.js"></script>
-  </head>
-  <body>
-    <div id="view" /> 
-    <!--script type="text/babel"-->
-    <script type="text/jsx">
+<!doctype html >
+<html >
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--<meta http-equiv="Content-Security-Policy" content="default-src 'unsafe-eval' 'unsafe-inline' *;  style-src *; font-src http://localhost:3000 https://fonts.googleapis.com https://maxcdn.bootstrapcdn.com https://use.fontawesome.com">-->
 
-      
-      var HelloReact = React.createClass({
-	propTypes: {
-	  message: React.PropTypes.string,
-	  number: React.PropTypes.number,
-	  requiredString: React.PropTypes.string.isRequired
-	},
+<head>
 
-	getDefaultProps: function() {
-	  return {
-	    message: 'Message from default'
-	  };	  
-	},
+    <title>Vat Invoice Manager</title>
 
-	updateMessage: function(e) {
-	  this.setState({message:e.target.value});
-	},
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
-	getInitialState: function() {
-	  return {
-		 message: 'Initial message from state'
-	  };
-	},
+    <!-- Optional theme -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
 
-        render : function () {
-          return (
-		<div>
-		  <input type='text' onChange={this.updateMessage}/>
-		  <h1>Hello React</h1>
-		  <div>{this.props.message}</div>
-		  <div>{this.props.number}</div>
-		  <div>{this.state.message}</div>
-		</div>
-	  );
-	}
-      });
+    <!--<link rel="stylesheet" href="styles/bootstrap-superhero.css"/>-->
+    <!--<link rel="stylesheet" href="styles/main.css">-->
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/app.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">-->
 
-      ReactDOM.render(<HelloReact number='42' />, document.getElementById('view'));  
-    </script>
-  </body>
+</head>
+<body>
+    <div id="react"> </div>
+
+    <div id="stateful"> </div>
+    <div id="stateless"> </div>
+    <script src="src/main/resources/static/built/bundle.js" defer></script>
+</body>
 </html>
