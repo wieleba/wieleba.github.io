@@ -86387,7 +86387,7 @@ exports.CALL_ERROR = CALL_ERROR;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var BACKEND_URL = 'http://vat.backend';
+var BACKEND_URL = 'https://vat.backend';
 exports.BACKEND_URL = BACKEND_URL;
 
 /***/ }),
@@ -88950,7 +88950,7 @@ var DownloadReport = function DownloadReport(_ref) {
     onClick: function onClick(e) {
       return e.stopPropagation();
     },
-    href: "http://localhost/report-service/report/api/report/" + report.id + "?token=" + localStorage.getItem('access-token')
+		href: "https://vat.backend/report-service/report/api/report/" + report.id + "?token=" + localStorage.getItem('access-token')
   }, _react.default.createElement(_fontAwesome.default, {
     icon: "download"
   })));
