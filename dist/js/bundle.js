@@ -63,7 +63,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "28c310e7cc3961474d1e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "25e82c6f8628a1073f3e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -86382,11 +86382,12 @@ exports.CALL_ERROR = CALL_ERROR;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+ //export const BACKEND_URL = 'http://localhost';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.BACKEND_URL = void 0;
 var BACKEND_URL = 'https://vat.backend';
 exports.BACKEND_URL = BACKEND_URL;
 
@@ -88937,6 +88938,8 @@ var _fontAwesome = _interopRequireDefault(__webpack_require__(/*! ../../experime
 
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var _api = __webpack_require__(/*! ../../base/api */ "./src/main/js/base/api.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DownloadReport = function DownloadReport(_ref) {
@@ -88950,7 +88953,7 @@ var DownloadReport = function DownloadReport(_ref) {
     onClick: function onClick(e) {
       return e.stopPropagation();
     },
-		href: "https://vat.backend/report-service/report/api/report/" + report.id + "?token=" + localStorage.getItem('access-token')
+    href: _api.BACKEND_URL + "/report-service/report/api/report/" + report.id + "?token=" + localStorage.getItem('access-token')
   }, _react.default.createElement(_fontAwesome.default, {
     icon: "download"
   })));
@@ -91280,7 +91283,7 @@ function () {
     }
   }, {
     key: "suggestionForNextMonth",
-    value: function suggestionForNextMonth(companyId) {
+    value: function suggestionForNextMonth(selectedCompany) {
       var token = localStorage.getItem('access-token');
       if (token === undefined) return {
         type: _actions.CALL_ERROR,
@@ -91289,7 +91292,7 @@ function () {
       return fetch(_api.BACKEND_URL + '/report-service/report/api/suggest/invoices', {
         headers: {
           'Accept': 'application/json',
-          'X-Company-Id': companyId || 1,
+          'X-Company-Id': selectedCompany.id || 1,
           'Authorization': 'Bearer ' + token
         }
       }).then(function (response) {
