@@ -63,7 +63,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "253524ac5af022fb33c8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e2a7433a65d101e34d99"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -89436,7 +89436,7 @@ var _default = function _default(_ref) {
       return onRemarksChange(e);
     },
     value: attributes.remarks,
-    as: "textarea",
+    componentClass: "textarea",
     rows: "3"
   })));
 };
