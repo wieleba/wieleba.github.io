@@ -63,7 +63,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "25e82c6f8628a1073f3e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "253524ac5af022fb33c8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -89435,7 +89435,9 @@ var _default = function _default(_ref) {
     onChange: function onChange(e) {
       return onRemarksChange(e);
     },
-    value: attributes.remarks
+    value: attributes.remarks,
+    as: "textarea",
+    rows: "3"
   })));
 };
 
@@ -91300,6 +91302,25 @@ function () {
       });
     }
   }, {
+    key: "downloadData",
+    value: function downloadData(response, blob) {
+      var cd = response.headers.get("Content-Disposition"); //Create a link element, hide it, direct
+      //it towards the blob, and then 'click' it programatically
+
+      var a = document.createElement("a");
+      a.style = "display: none";
+      document.body.appendChild(a); //Create a DOMString representing the blob
+      //and point the link element towards it
+
+      var url = window.URL.createObjectURL(blob);
+      a.href = url;
+      a.download = cd.substring(cd.indexOf('=') + 1); //programatically click the link to trigger the download
+
+      a.click(); //release the reference to the file by revoking the Object URL
+
+      window.URL.revokeObjectURL(url);
+    }
+  }, {
     key: "generateReport",
     value: function generateReport(payload) {
       (0, _debug_local.default)(payload, "PAYLOAD");
@@ -91308,8 +91329,12 @@ function () {
         type: _actions.CALL_ERROR,
         error: 'Please log in'
       };
-      return fetch(_api.BACKEND_URL + '/report-service/report/api/generate', ReportApi._options(payload.data, payload.companyId, token)).then(function (response) {
-        return response.json();
+      return fetch(_api.BACKEND_URL + '/report-service/report/api/generate', ReportApi._options(payload.data, payload.companyId, token)).then(function (r) {
+        if (r.ok) {
+          r.clone().blob().then(function (blob) {
+            return ReportApi.downloadData(r, blob);
+          });
+        }
       });
     }
   }]);
@@ -91689,8 +91714,8 @@ function generateReport(action) {
         case 3:
           data = _context4.sent;
 
-          if (!(data.errorCode || data.error)) {
-            _context4.next = 9;
+          if (!(data && (data.errorCode || data.error))) {
+            _context4.next = 7;
             break;
           }
 
@@ -91698,31 +91723,22 @@ function generateReport(action) {
           return (0, _effects.put)(registerResponse(_actions2.CALL_ERROR, data.errorMessage || data.error));
 
         case 7:
-          _context4.next = 12;
+          _context4.next = 14;
           break;
 
         case 9:
-          console.log("Generated?", data);
-          _context4.next = 12;
-          return (0, _effects.put)((0, _reactRouterRedux.push)("reports"));
-
-        case 12:
-          _context4.next = 19;
-          break;
-
-        case 14:
-          _context4.prev = 14;
+          _context4.prev = 9;
           _context4.t0 = _context4["catch"](0);
           console.log("ERROR", _context4.t0);
-          _context4.next = 19;
+          _context4.next = 14;
           return (0, _effects.put)(registerResponse(_actions2.CALL_ERROR, _context4.t0.message));
 
-        case 19:
+        case 14:
         case "end":
           return _context4.stop();
       }
     }
-  }, _marked4, this, [[0, 14]]);
+  }, _marked4, this, [[0, 9]]);
 }
 
 function registerResponse(type, response) {
